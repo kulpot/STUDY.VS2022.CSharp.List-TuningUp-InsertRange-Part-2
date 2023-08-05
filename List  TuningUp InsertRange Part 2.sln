@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "List  TuningUp InsertRange Part 2", "List  TuningUp InsertRange Part 2\List  TuningUp InsertRange Part 2.csproj", "{DC414CF1-1AE6-4CE8-A2DF-29561C21BEA5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DC414CF1-1AE6-4CE8-A2DF-29561C21BEA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC414CF1-1AE6-4CE8-A2DF-29561C21BEA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC414CF1-1AE6-4CE8-A2DF-29561C21BEA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC414CF1-1AE6-4CE8-A2DF-29561C21BEA5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {03E061EB-1DA7-46D2-A34E-0758F8DA67B3}
+	EndGlobalSection
+EndGlobal
