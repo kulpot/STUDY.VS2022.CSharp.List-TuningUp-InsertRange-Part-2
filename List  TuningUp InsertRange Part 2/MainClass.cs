@@ -116,17 +116,32 @@ class MeList<T> : IEnumerable<T>
     }
     public void InsertRange(int index, IEnumerable<T> newItems)
     {
-        int newItemsCount = newItems.Count();   // for optimization
+        T[] newItemsAsArray = newItems.ToArray();   // 4xfaster - trade memory for speed
+        //int newItemsCount = newItems.Count();   // for optimization
         //EnsureCapacity(Count + newItems.Count());
-        EnsureCapacity(Count + newItemsCount);
-        // Shuffle everyone down the existing array
+        //EnsureCapacity(Count + newItemsCount);  // 1st copy
+         
+        if(Count + newItemsAsArray.Length > Capacity) // premature optimization 
+        {
+            T[] newUnderlyingArray = new T[Count = newItemsAsArray.Length];
+            Array.Copy(items, newUnderlyingArray, index);
+            Array.Copy(items, index, newUnderlyingArray, index + newItemsAsArray.Length, Count - index);
+            items = newUnderlyingArray; // remove the old array
+        }
+        else
+        {
+            // Shuffle
+            Array.Copy(items, index, items, index + newItemsAsArray.Length, Count - index);
+        }
+        // Shuffle
         //Array.Copy(sourceArray, sourceIndex, destinationArray, destinationIndex, length);
         //Array.Copy(items, index, items, index + newItems.Count(), Count - index);
-        Array.Copy(items, index, items, index + newItemsCount, Count - index);
-        foreach (T newItem in newItems)
-            items[index++] = newItem;
+        //Array.Copy(items, index, items, index + newItemsCount, Count - index);  // 2nd copy
+        Array.Copy(newItemsAsArray, 0, items, index, newItemsAsArray.Length);
+        //foreach (T newItem in newItems)
+        //    items[index++] = newItem;
         //Count += newItems.Count();
-        Count += newItemsCount;
+        Count += newItemsAsArray.Length;
     }
     void EnsureCapacity()
     {
@@ -156,8 +171,12 @@ class MainClass
 
         // Insert, InsertRange, GetRange
 
-        MeList<int> myPartyAges = new MeList<int>();
-        int[] aBunchOfItems = Enumerable.Range(0, 100000).ToArray();
+        MeList<int> myPartyAges = new MeList<int>(4) { 1, 2, 5, 6 };
+        myPartyAges.InsertRange(2, new[] { 3, 4 });
+        foreach(int i in myPartyAges)
+            Console.WriteLine(i);
+        return;
+        int[] aBunchOfItems = Enumerable.Range(0, 10000000).ToArray();
         //myPartyAges.AddRange(aBunchOfItems);       // missing reference for vs2022-pending
         Console.WriteLine("Inserting...");
         Stopwatch timer = new Stopwatch();
