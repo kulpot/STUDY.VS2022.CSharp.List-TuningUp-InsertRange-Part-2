@@ -144,9 +144,10 @@ class MeList<T> : IEnumerable<T>
             if (targetSize < neededCapacity)
                 targetSize = neededCapacity;
             Array.Resize(ref items, targetSize);
+            Console.WriteLine("Resizing...");
         }
     }
-   
+
 }
 class MainClass
 {
@@ -157,14 +158,22 @@ class MainClass
 
         MeList<int> myPartyAges = new MeList<int>();
         int[] aBunchOfItems = Enumerable.Range(0, 100000).ToArray();
-        myPartyAges.AddRange(aBunchOfItems);
-        
+        //myPartyAges.AddRange(aBunchOfItems);       // missing reference for vs2022-pending
+        Console.WriteLine("Inserting...");
+        Stopwatch timer = new Stopwatch();
+        timer.Start();
+        myPartyAges.InsertRange(5, aBunchOfItems);
+        timer.Stop();
+        Console.WriteLine(timer.ElapsedTicks / (float)Stopwatch.Frequency);
+
         //foreach(int i in myPartyAges)
         //    Console.WriteLine(i + " ");
-        myPartyAges.InsertRange(5, aBunchOfItems);
-        Console.WriteLine(myPartyAges.Count);
-        
-        
+        //myPartyAges.InsertRange(5, aBunchOfItems);
+        //Console.WriteLine(myPartyAges.Count);
+        //foreach (int i in myPartyAges)
+        //   Console.WriteLine(i + " ");
+
+
 
 
 
